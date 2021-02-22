@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Post a image or meme</h1>
+<th:block th:if="${message}">
+    <span th:text="${message}"></span>
+</th:block>
+<form method="post" th:object="${conversation}" enctype="multipart/form-data">
+    <table>
+        <tr>
+            <td>Title</td>
+            <td><input type="text" th:field="*{name}">
+                <input type="hidden" th:field="*{upvote}" value="0">
+            </td>
+        </tr>
+        <tr>
+            <td>Upload Image</td>
+            <td><input type="file" th:field="*{img}" accept="image/png, image/jpeg"></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="submit" value="Upload"></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

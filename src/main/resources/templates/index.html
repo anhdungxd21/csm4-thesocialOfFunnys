@@ -1,10 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Go Fun</title>
 </head>
 <body>
-
+    <table>
+        <tr th:each="conversation: ${conversations}">
+            <p th:text="*{conversation.name}"></p>
+            <img th:src="${conversation.imgSrc}" width="500px" height="500px">
+        </tr>
+    </table>
 </body>
 </html>

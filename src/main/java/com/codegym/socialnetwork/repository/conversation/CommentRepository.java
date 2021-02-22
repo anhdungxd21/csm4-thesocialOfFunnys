@@ -1,6 +1,6 @@
 package com.codegym.socialnetwork.repository.conversation;
 
-import com.codegym.socialnetwork.model.converstation.Comment;
+import com.codegym.socialnetwork.model.Comment;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 

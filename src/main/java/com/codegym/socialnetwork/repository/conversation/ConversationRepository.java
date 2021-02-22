@@ -1,6 +1,6 @@
 package com.codegym.socialnetwork.repository.conversation;
 
-import com.codegym.socialnetwork.model.converstation.Conversation;
+import com.codegym.socialnetwork.model.Conversation;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

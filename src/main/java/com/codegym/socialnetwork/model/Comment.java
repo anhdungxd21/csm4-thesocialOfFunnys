@@ -1,4 +1,4 @@
-package com.codegym.socialnetwork.model.converstation;
+package com.codegym.socialnetwork.model;
 
 import lombok.Data;
 
@@ -10,8 +10,9 @@ import javax.persistence.*;
 public class Comment {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Long conversationId;
-    private int user_id;
+    private int userId;
     private String context;
 }
