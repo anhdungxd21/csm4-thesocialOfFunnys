@@ -5,10 +5,13 @@
     <title>Go Fun</title>
 </head>
 <body>
+
     <table>
         <tr th:each="conversation: ${conversations}">
+            <a th:href="@{/post(id=${conversation.id})}">
             <p th:text="*{conversation.name}"></p>
-            <img th:src="${conversation.imgSrc}" width="500px" height="500px">
+            <img th:src="${conversation.imgSrc}" width="500px">
+            </a>
         </tr>
     </table>
 </body>

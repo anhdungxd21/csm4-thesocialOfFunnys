@@ -6,7 +6,10 @@ import com.codegym.socialnetwork.service.conversation.ConversationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
+import java.util.Stack;
 
 @Service
 public class ConversationServiceImpl implements ConversationService {
@@ -32,5 +35,19 @@ public class ConversationServiceImpl implements ConversationService {
     @Override
     public void remove(Long id) {
         conversationRepository.deleteById(id);
+    }
+
+    @Override
+    public Iterable<Conversation> findAllNewestRecord() {
+        List<Conversation> conversations = (List<Conversation>) conversationRepository.findAll();
+        Stack<Conversation> stacks = new Stack();
+        List<Conversation> conversationList = new ArrayList<Conversation>();
+        for (int i = 0; i < conversations.size(); i++) {
+            stacks.push(conversations.get(i));
+        }
+        while(stacks.isEmpty() == false){
+            conversationList.add(stacks.pop());
+        }
+        return conversationList;
     }
 }
