@@ -1,10 +1,16 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5" lang="">
 <head>
-    <meta charset="UTF-8">
-    <title>Go Fun</title>
+    <meta charset="UTF-8" />
+    <title>Index Page</title>
 </head>
 <body>
+Logged user: <span sec:authentication="name"></span> <br/>
+Roles: <span sec:authentication="principal.authorities"></span>
+<form action="#" th:action="@{/logout}" method="POST">
+    <button type="submit">Logout</button>
+</form>
     <table>
         <tr th:each="conversation: ${conversations}">
             <p th:text="*{conversation.name}"></p>
