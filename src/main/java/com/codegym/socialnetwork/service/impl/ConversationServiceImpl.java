@@ -1,7 +1,8 @@
-package com.codegym.socialnetwork.service;
+package com.codegym.socialnetwork.service.impl;
 
 import com.codegym.socialnetwork.model.Conversation;
 import com.codegym.socialnetwork.repository.conversation.ConversationRepository;
+import com.codegym.socialnetwork.service.ConversationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

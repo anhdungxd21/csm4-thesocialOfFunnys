@@ -10,6 +10,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.rememberme.InMemoryTokenRepositoryImpl;
+import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 
 @Configuration
 @EnableWebSecurity
@@ -30,21 +32,53 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
-                .authorizeRequests()
-                .antMatchers("/register").permitAll()
-                .antMatchers("/").hasRole("MEMBER")
-                .antMatchers("/admin").hasRole("ADMIN")
-                .and()
-                .formLogin()
+        http.csrf().disable();
+
+        http.authorizeRequests()
+                .antMatchers("/","/login","/register","/post").permitAll();
+
+        http.authorizeRequests()
+                .antMatchers("/upload").access("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')");
+
+        http.authorizeRequests().and().exceptionHandling().accessDeniedPage("/403");
+
+        http.authorizeRequests().and().formLogin()
+                .loginProcessingUrl("/j_spring_security_check")
                 .loginPage("/login")
-                .usernameParameter("email")
-                .passwordParameter("password")
                 .defaultSuccessUrl("/")
-                .failureUrl("/login?error")
-                .and()
-                .exceptionHandling()
-                .accessDeniedPage("/403");
+                .failureUrl("/login?error=true")
+                .usernameParameter("username")
+                .passwordParameter("password")
+                .and().logout().logoutUrl("/");//logoutSuccessUrl("/logoutSuccessful");
+
+        http.authorizeRequests().and()
+                .rememberMe().tokenRepository(this.persistentTokenRepository())
+                .tokenValiditySeconds(1 * 24 * 60 * 60);
     }
+
+    @Bean
+    public PersistentTokenRepository persistentTokenRepository() {
+        InMemoryTokenRepositoryImpl memory = new InMemoryTokenRepositoryImpl(); // Ta lưu tạm remember me trong memory (RAM). Nếu cần mình có thể lưu trong database
+        return memory;
+    }
+
+//    @Override
+//    protected void configure(HttpSecurity http) throws Exception {
+//        http
+//                .authorizeRequests()
+//                .antMatchers("/register").permitAll()
+//                .antMatchers("/").permitAll()
+//                .antMatchers("/u").hasRole("ADMIN")
+//                .and()
+//                .formLogin()
+//                .loginPage("/login")
+//                .usernameParameter("email")
+//                .passwordParameter("password")
+//                .defaultSuccessUrl("/")
+//                .failureUrl("/login?error")
+//                .and()
+//                .exceptionHandling()
+//                .accessDeniedPage("/403");
+//    }
 
 }
