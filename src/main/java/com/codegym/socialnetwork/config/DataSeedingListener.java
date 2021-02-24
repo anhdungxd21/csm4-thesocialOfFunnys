@@ -39,7 +39,7 @@ public class DataSeedingListener implements ApplicationListener<ContextRefreshed
         if (userRepository.findByUsername("admin") == null) {
             User admin = new User();
             admin.setUsername("admin");
-            admin.setPassword(passwordEncoder.encode("123456"));
+            admin.setPassword(passwordEncoder.encode("admin"));
             HashSet<Role> roles = new HashSet<>();
             roles.add(roleRepository.findByName("ROLE_ADMIN"));
             roles.add(roleRepository.findByName("ROLE_MEMBER"));
@@ -51,7 +51,7 @@ public class DataSeedingListener implements ApplicationListener<ContextRefreshed
         if (userRepository.findByUsername("member") == null) {
             User user = new User();
             user.setUsername("member");
-            user.setPassword(passwordEncoder.encode("123456"));
+            user.setPassword(passwordEncoder.encode("admin"));
             HashSet<Role> roles = new HashSet<>();
             roles.add(roleRepository.findByName("ROLE_MEMBER"));
             user.setRoles(roles);
