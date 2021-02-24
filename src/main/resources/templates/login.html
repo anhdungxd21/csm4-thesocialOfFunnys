@@ -9,14 +9,15 @@
 <body>
 <div class="container">
     <div class="main-content">
-        <p th:if="${param.error}" class="error">Invalid email or password</p>
+        <p th:if="${param.error}" class="error">Invalid username or password</p>
         <p th:if="${param.logout}" class="success">You have been logged out</p>
         <h3>Login to continue</h3>
         <form th:action="@{/login}" method="POST">
-            <input type="text" name="email" placeholder="Your email" /><br />
+            <input type="text" name="username" placeholder="Your username" /><br />
             <input type="password" name="password" placeholder="Your password" /><br />
             <button type="submit">Login</button> <br />
         </form>
+    </div>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

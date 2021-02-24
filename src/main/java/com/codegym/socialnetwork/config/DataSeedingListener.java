@@ -36,10 +36,10 @@ public class DataSeedingListener implements ApplicationListener<ContextRefreshed
         }
 
         // Admin account
-        if (userRepository.findByEmail("admin@gmail.com") == null) {
+        if (userRepository.findByUsername("admin") == null) {
             User admin = new User();
             admin.setUsername("admin");
-            admin.setPassword(passwordEncoder.encode("123456"));
+            admin.setPassword(passwordEncoder.encode("admin"));
             HashSet<Role> roles = new HashSet<>();
             roles.add(roleRepository.findByName("ROLE_ADMIN"));
             roles.add(roleRepository.findByName("ROLE_MEMBER"));
@@ -48,10 +48,10 @@ public class DataSeedingListener implements ApplicationListener<ContextRefreshed
         }
 
         // Member account
-        if (userRepository.findByEmail("member@gmail.com") == null) {
+        if (userRepository.findByUsername("member") == null) {
             User user = new User();
-            user.setUsername("admin");
-            user.setPassword(passwordEncoder.encode("123456"));
+            user.setUsername("member");
+            user.setPassword(passwordEncoder.encode("admin"));
             HashSet<Role> roles = new HashSet<>();
             roles.add(roleRepository.findByName("ROLE_MEMBER"));
             user.setRoles(roles);
