@@ -43,6 +43,7 @@ public class UploadFileController {
             e.printStackTrace();
         }
         conversation.setImgSrc(fileName);
+        conversation.setUpvote(0L);
         conversationService.save(conversation);
         ModelAndView model = new ModelAndView("conversation/upload");
         model.addObject("conversation",new Conversation());

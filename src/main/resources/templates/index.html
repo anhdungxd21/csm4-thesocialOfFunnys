@@ -12,6 +12,9 @@
             <h3 th:text="*{conversation.name}"></h3>
             <img th:src="${conversation.imgSrc}" width="500px">
             </a>
+            <p th:text="${conversation.upvote}"></p><p>point</p>
+            <input type="submit" value="Upvote">
+            <input type="submit" value="Downvote">
         </tr>
     </table>
 </body>
