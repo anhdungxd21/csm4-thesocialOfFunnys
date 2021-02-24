@@ -15,11 +15,15 @@
     <textarea th:field="${comment.context}" cols="60" rows="10" placeholder="Write a comment here ..."></textarea><br>
     <input type="submit" value="POST">
 </form>
-<table>
-    <tr th:each="commentOld : ${comments}">
-        <td><h4 th:text="${commentOld.userName}"></h4></td>
-        <td th:text="${commentOld.context}"></td>
-    </tr>
-</table>
+<fieldset>
+    <legend>Comment</legend>
+    <table>
+        <tr th:each="commentOld,valueable : ${comments}">
+            <td th:text="${valueable.index +1}"></td>
+            <td><h4 th:text="${commentOld.userName}"></h4></td>
+            <td th:text="${commentOld.context}"></td>
+        </tr>
+    </table>
+</fieldset>
 </body>
 </html>
