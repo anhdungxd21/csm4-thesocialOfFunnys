@@ -1,4 +1,4 @@
-package com.codegym.socialnetwork.domain;
+package com.codegym.socialnetwork.model;
 
 import lombok.Data;
 
@@ -7,7 +7,7 @@ import java.io.Serializable;
 import java.util.Set;
 
 @Entity
-@Table(name = "user")
+@Table(name = "users")
 @Data
 public class User implements Serializable {
 

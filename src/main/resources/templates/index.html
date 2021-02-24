@@ -13,8 +13,17 @@
             <img th:src="${conversation.imgSrc}" width="500px">
             </a>
             <p th:text="${conversation.upvote}"></p><p>point</p>
-            <input type="submit" value="Upvote">
-            <input type="submit" value="Downvote">
+            <th:block th:if="${user}">
+                <input type="submit" value="Upvote">
+                <input type="submit" value="Downvote">
+                <th:block th:if="${user.getRole()}=='ROLE_ADMIN'">
+                    <form method="post">
+                        <input type="hidden" name="conversation" value="${conversation.id}">
+                        <input type="submit" value="Delete">
+                    </form>
+                </th:block>
+            </th:block>
+            <hr>
         </tr>
     </table>
 </body>
