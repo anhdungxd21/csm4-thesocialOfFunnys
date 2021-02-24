@@ -1,4 +1,4 @@
-package com.codegym.socialnetwork.service.conversation;
+package com.codegym.socialnetwork.service;
 
 import com.codegym.socialnetwork.model.Conversation;
 import com.codegym.socialnetwork.service.GeneralService;

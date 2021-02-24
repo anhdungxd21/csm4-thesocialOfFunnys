@@ -1,7 +1,7 @@
 package com.codegym.socialnetwork.controller;
 
 import com.codegym.socialnetwork.model.Conversation;
-import com.codegym.socialnetwork.service.conversation.ConversationService;
+import com.codegym.socialnetwork.service.ConversationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;

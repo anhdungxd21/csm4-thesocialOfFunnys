@@ -1,10 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/layout :: head">
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title th:text="${conversation.name}"></title>
 </head>
 <body>
+<div id="menu" th:replace="/layout :: menu"></div>
 
+<h3 th:text="${conversation.name}"></h3>
+<img th:src="${conversation.imgSrc}" th:alt="${conversation.name}" width="500px">
+<form method="post" th:object="${comment}">
+    <label for="name">Name</label><br>
+    <input type="text" id="name" th:field="${comment.userName}"><br>
+    <textarea th:field="${comment.context}" cols="60" rows="10" placeholder="Write a comment here ..."></textarea><br>
+    <input type="submit" value="POST">
+</form>
+<table>
+    <tr th:each="commentOld : ${comments}">
+        <td><h4 th:text="${commentOld.userName}"></h4></td>
+        <td th:text="${commentOld.context}"></td>
+    </tr>
+</table>
 </body>
 </html>

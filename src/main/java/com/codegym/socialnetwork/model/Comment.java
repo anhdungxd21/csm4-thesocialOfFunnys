@@ -13,6 +13,6 @@ public class Comment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Long conversationId;
-    private int userId;
+    private String userName;
     private String context;
 }

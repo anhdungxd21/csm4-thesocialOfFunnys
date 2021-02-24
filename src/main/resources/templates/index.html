@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
+<head th:replace="/layout :: head">
     <meta charset="UTF-8">
     <title>Go Fun</title>
 </head>
 <body>
-
+<div id="menu" th:replace="/layout :: menu"></div>
     <table>
         <tr th:each="conversation: ${conversations}">
             <a th:href="@{/post(id=${conversation.id})}">
-            <p th:text="*{conversation.name}"></p>
+            <h3 th:text="*{conversation.name}"></h3>
             <img th:src="${conversation.imgSrc}" width="500px">
             </a>
         </tr>
