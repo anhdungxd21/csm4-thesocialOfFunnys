@@ -40,7 +40,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/","/login","/register","/post").permitAll();
 
         http.authorizeRequests()
-                .antMatchers("/upload").access("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')");
+                .antMatchers("/upload","/u/**").access("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')");
 
         http.authorizeRequests().and().exceptionHandling().accessDeniedPage("/403");
 

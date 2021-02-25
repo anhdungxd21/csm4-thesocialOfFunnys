@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/layout :: head">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="menu" th:replace="/layout :: menu"></div>
+<table>
+    <tr>
+        <h1 th:text="${user.username}"></h1>
+        <hr>
+    </tr>
+    <tr>
+        <h4>Description</h4>
+        <p th:if="${user.description}" th:text="${user.description}"></p>
+        <p id="form">
+        <button onclick="showEditForm()">Edit</button>
+        </p>
+    </tr>
+</table>
+
+<script>
+    function showEditForm(){
+        let form = "<form method=\" post\">\n" +
+        "        <textarea cols=\"50\" rows=\"10\" name=\"description\" placeholder=\"Description about yourself...\"></textarea>\n" +
+        "        <input type=\"submit\" value=\"Edit\">\n" +
+        "    </form>\n" +
+        "<button onclick=\"hideEditForm()\">Cancel</button>";
+
+        document.getElementById("form").innerHTML = form;
+    }
+    function hideEditForm(){
+        let show = "<button onclick=\"showEditForm()\">Edit</button>";
+        document.getElementById("form").innerHTML = show;
+    }
+</script>
+</body>
+</html>

@@ -20,7 +20,7 @@
     <table>
         <tr th:each="commentOld,valueable : ${comments}">
             <td th:text="${valueable.index +1}"></td>
-            <td><h4 th:text="${commentOld.userName}"></h4></td>
+            <td><a th:href="@{/u/{username}(username=${commentOld.userName})}"><h4 th:text="${commentOld.userName}"></h4></a></td>
             <td th:text="${commentOld.context}"></td>
         </tr>
     </table>
