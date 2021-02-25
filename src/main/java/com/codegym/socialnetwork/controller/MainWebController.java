@@ -36,14 +36,20 @@ public class MainWebController {
         model.addObject("conversations", conversations);
         return model;
     }
+
+
+
     @GetMapping("/post")
     public ModelAndView viewPost(@RequestParam(value = "id", required = true) Long id){
         ModelAndView modelAndView;
         Optional<Conversation> optionalConversation = conversationService.findById(id);
         if(optionalConversation.isPresent()){
+
             Conversation conversation = optionalConversation.get();
             List<Comment> comments = (List<Comment>) commentService.findAllByConversationId(id);
-            modelAndView = new ModelAndView("/conversation/post", "conversation",conversation);
+            modelAndView = new ModelAndView("conversation/post");
+
+            modelAndView.addObject("conversation",conversation);
             modelAndView.addObject("user", userService.getCurrentUser());
             modelAndView.addObject("comment",new Comment());
             modelAndView.addObject("comments",comments);
@@ -53,9 +59,21 @@ public class MainWebController {
         }
     }
     @PostMapping("/post")
-    public String postComment(@RequestParam(value = "id", required = true) Long id, @ModelAttribute("comment") Comment comment){
+    public String postComment(@RequestParam(value = "id", required = true) Long id,
+                              @ModelAttribute("comment") Comment comment,
+                              @RequestParam(value = "commentId", required = false) Long commentId,
+                              @RequestParam(value = "conversationId", required = false) Long conversationId){
+        if(conversationId != null){
+            conversationService.remove(conversationId);
+            return "redirect:/";
+        }
+        if(commentId !=null){
+            commentService.remove(commentId);
+            return "redirect:/post?id="+id;
+        }
         comment.setConversationId(id);
         comment.setUserName(userService.getCurrentUser().getUsername());
+        comment.setId(null);
         commentService.save(comment);
         return "redirect:/post?id="+id;
     }

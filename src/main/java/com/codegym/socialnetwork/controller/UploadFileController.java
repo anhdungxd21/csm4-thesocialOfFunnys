@@ -1,7 +1,9 @@
 package com.codegym.socialnetwork.controller;
 
 import com.codegym.socialnetwork.model.Conversation;
+import com.codegym.socialnetwork.model.User;
 import com.codegym.socialnetwork.service.ConversationService;
+import com.codegym.socialnetwork.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -26,9 +28,14 @@ public class UploadFileController {
     @Autowired
     private ConversationService conversationService;
 
+    @Autowired
+    private IUserService userService;
+
     @GetMapping
     public ModelAndView createForm(){
+        User user = userService.getCurrentUser();
         ModelAndView modelAndView = new ModelAndView("conversation/upload");
+        modelAndView.addObject("user",user);
         modelAndView.addObject("conversation", new Conversation());
         return modelAndView;
     }
@@ -45,7 +52,7 @@ public class UploadFileController {
         conversation.setImgSrc(fileName);
         conversation.setUpvote(0L);
         conversationService.save(conversation);
-        ModelAndView model = new ModelAndView("conversation/upload");
+        ModelAndView model = new ModelAndView("redirect:/upload");
         model.addObject("conversation",new Conversation());
         model.addObject("message","New Conversation was posted");
         return model;

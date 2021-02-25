@@ -1,10 +1,46 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/layout :: head">
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
-<h1>Guest</h1>
+<div id="menu" th:replace="/layout :: menu"></div>
+<table>
+    <tr>
+        <h1 th:text="${userInfo.username}"></h1>
+        <hr>
+    </tr>
+    <tr>
+        <td colspan="2"><h4>Description</h4></td>
+    </tr>
+    <tr>
+        <td colspan="2"><p th:if="${user.description}" th:text="${user.description}"></p>
+        </td>
+
+    </tr>
+    <tr>
+        <td colspan="2"><h4>Status</h4></td>
+    </tr>
+    <tr>
+        <td>
+            <form method="post">
+                <textarea cols="50" rows="10" name="commentUser" placeholder="Write something..."></textarea>
+                <input type="submit" value="Post">
+            </form>
+        </td>
+    </tr>
+</table>
+
+<fieldset>
+    <legend>Status</legend>
+    <table>
+        <tr th:each="comment,commentParm: ${comments}">
+            <td th:text="${commentParm.index + 1}"></td>
+            <td><h4 th:text="${comment.userCommentName}"></h4></td>
+            <td th:text="${comment.comment}"></td>
+        </tr>
+    </table>
+</fieldset>
 </body>
 </html>

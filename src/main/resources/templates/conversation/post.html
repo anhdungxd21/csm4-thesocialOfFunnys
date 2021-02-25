@@ -7,7 +7,19 @@
 <body>
 <div id="menu" th:replace="/layout :: menu"></div>
 
-<h3 th:text="${conversation.name}"></h3>
+<table>
+    <tr>
+        <td><h3 th:text="${conversation.name}"></h3></td>
+        <td th:if="${user}">
+            <form method="post" th:if="${user.getRole()}=='ROLE_ADMIN'">
+                <input type="hidden" name="conversationId" th:value="${conversation.getId()}">
+                <input type="submit" value="Delete">
+            </form>
+        </td>
+    </tr>
+</table>
+
+
 <img th:src="${conversation.imgSrc}" th:alt="${conversation.name}" width="500px">
 <th:block th:if="${user}">
     <form method="post" th:object="${comment}">
@@ -22,6 +34,12 @@
             <td th:text="${valueable.index +1}"></td>
             <td><a th:href="@{/u/{username}(username=${commentOld.userName})}"><h4 th:text="${commentOld.userName}"></h4></a></td>
             <td th:text="${commentOld.context}"></td>
+            <td th:if="${user}">
+                <form th:if="${user.getRole()}=='ROLE_ADMIN'" method="post" >
+                    <input type="hidden" name="commentId" th:value="${commentOld.getId()}">
+                    <input type="submit" value="Delete">
+                </form>
+            </td>
         </tr>
     </table>
 </fieldset>

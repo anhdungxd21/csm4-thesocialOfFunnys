@@ -12,17 +12,43 @@
         <hr>
     </tr>
     <tr>
-        <h4>Description</h4>
-        <p th:if="${user.description}" th:text="${user.description}"></p>
-        <p id="form">
-        <button onclick="showEditForm()">Edit</button>
-        </p>
+        <td colspan="2"><h4>Description</h4></td>
+    </tr>
+    <tr>
+        <td colspan="2"><p th:if="${user.description}" th:text="${user.description}"></p>
+            <p id="form">
+                <button onclick="showEditForm()">Edit</button>
+            </p>
+        </td>
+
+    </tr>
+    <tr>
+        <td colspan="2"><h4>Status</h4></td>
+    </tr>
+    <tr>
+        <td>
+            <form method="post">
+                <textarea cols="50" rows="10" name="commentUser" placeholder="Write something..."></textarea>
+                <input type="submit" value="Post">
+            </form>
+        </td>
     </tr>
 </table>
 
+<fieldset>
+    <legend>Status</legend>
+    <table>
+        <tr th:each="comment,commentParm: ${comments}">
+            <td th:text="${commentParm.index + 1}"></td>
+            <td><h4 th:text="${comment.userCommentName}"></h4></td>
+            <td th:text="${comment.comment}"></td>
+        </tr>
+    </table>
+</fieldset>
+
 <script>
     function showEditForm(){
-        let form = "<form method=\" post\">\n" +
+        let form = "<form method=\"post\">\n" +
         "        <textarea cols=\"50\" rows=\"10\" name=\"description\" placeholder=\"Description about yourself...\"></textarea>\n" +
         "        <input type=\"submit\" value=\"Edit\">\n" +
         "    </form>\n" +
